@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{ width: "100%", height: "100%" }}>
+      <Canvas
+        camera={{
+          position: [10000, 10000, 10000],
+          rotation: [-0.5, 0, 0],
+          far: 100000,
+        }}
+      >
+        <color attach="background" args={["#000"]} />
+        <ambientLight color={"#fff"} intensity={5} />
+        <axesHelper args={[20000]} />
+        <OrbitControls />
+        <mesh position={[0, 0, 0]}>
+          <boxGeometry args={[100, 100, 100]} />
+          <meshStandardMaterial color={"#f00"} />
+        </mesh>
+      </Canvas>
+    </div>
+  );
 }
 
-export default App
+export default App;
